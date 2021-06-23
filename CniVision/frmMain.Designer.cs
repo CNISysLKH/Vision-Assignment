@@ -40,7 +40,6 @@
             this.pnlTactTime = new System.Windows.Forms.Panel();
             this.lblTactTime = new System.Windows.Forms.Label();
             this.lblDataCount = new System.Windows.Forms.Label();
-            this.btnTactTimeReset = new System.Windows.Forms.Button();
             this.tlpControls = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -171,7 +170,6 @@
             // 
             this.pnlTactTime.Controls.Add(this.lblTactTime);
             this.pnlTactTime.Controls.Add(this.lblDataCount);
-            this.pnlTactTime.Controls.Add(this.btnTactTimeReset);
             this.pnlTactTime.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTactTime.Location = new System.Drawing.Point(0, 0);
             this.pnlTactTime.Name = "pnlTactTime";
@@ -186,7 +184,7 @@
             this.lblTactTime.Location = new System.Drawing.Point(246, 5);
             this.lblTactTime.Name = "lblTactTime";
             this.lblTactTime.Padding = new System.Windows.Forms.Padding(5);
-            this.lblTactTime.Size = new System.Drawing.Size(575, 63);
+            this.lblTactTime.Size = new System.Drawing.Size(669, 63);
             this.lblTactTime.TabIndex = 1;
             this.lblTactTime.Text = "Tact Time";
             this.lblTactTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -201,18 +199,6 @@
             this.lblDataCount.TabIndex = 2;
             this.lblDataCount.Text = "찾은 개수 : ";
             this.lblDataCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // btnTactTimeReset
-            // 
-            this.btnTactTimeReset.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnTactTimeReset.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.btnTactTimeReset.Location = new System.Drawing.Point(821, 5);
-            this.btnTactTimeReset.Name = "btnTactTimeReset";
-            this.btnTactTimeReset.Size = new System.Drawing.Size(94, 63);
-            this.btnTactTimeReset.TabIndex = 0;
-            this.btnTactTimeReset.Text = "Reset";
-            this.btnTactTimeReset.UseVisualStyleBackColor = true;
-            this.btnTactTimeReset.Click += new System.EventHandler(this.btnTactTimeReset_Click);
             // 
             // tlpControls
             // 
@@ -452,7 +438,6 @@
         private System.Windows.Forms.Button btnCameraControl;
         private Cognex.VisionPro.CogRecordDisplay cRecordDisplay;
         private System.Windows.Forms.Panel pnlTactTime;
-        private System.Windows.Forms.Button btnTactTimeReset;
         private System.Windows.Forms.Label lblTactTime;
         private System.Windows.Forms.Label lblDataCount;
         private System.Windows.Forms.Button button1;

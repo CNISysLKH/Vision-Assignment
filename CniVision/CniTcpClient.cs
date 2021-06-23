@@ -53,6 +53,7 @@ namespace CniVision
 
 
                 state = true;
+                IsConnected = state;
             }
             catch (Exception ex)
             {
@@ -139,9 +140,8 @@ namespace CniVision
                         }
                         else
                         {   // 연결이 안되어 있다면 연결 해제 후 재연결 시도
-                            tcpClient.Close();          
+                            if (tcpClient != null) tcpClient.Close();
                             Connect();
-                            IsConnected = true;
                         }
                     }
                     catch

@@ -30,7 +30,7 @@ namespace CniVision
         private bool[] cameraAcqState = null;       // 카메라 촬영 상태 배열 변수
         private ICogImage[] images = null;          // 이미지 배열 변후
 
-        private CniMerge mergeTool = null;          // 병합 클래스 변수
+        //private CniMerge mergeTool = null;          // 병합 클래스 변수
         private CniToolProcess toolProcess = null;  // 툴 클래스 변수
 
         private static int? _iCameraNum = null;     // 카메라의 개수 (무조건 초기 카메라 개수 확인 시 한 번만 선언)
@@ -64,9 +64,6 @@ namespace CniVision
 
         #region 네트워크 변수
         private CniTcpClient client = null;
-        private Task<bool> connServer = null;
-        private Task chkConnectionServer = null;
-        private bool IsConnect = false;
         #endregion
 
         #region 인덱서
@@ -118,25 +115,7 @@ namespace CniVision
             client.ServerIP = ip;
             client.ServerPort = port;
 
-
-            // 연결 상태 확인 후 연결 안되어있다면 서버 연결 시도
-            chkConnectionServer = new Task(() =>
-            {
-                while (true)
-                {
-                    Thread.Sleep(5000);                 // 5000ms 마다 폼 활성화 상태 확인
-
-                    // 연결 안되어 있다면 연결 시도
-                    if (!IsConnect)
-                    {
-                        connServer = new Task<bool>(ServerConnect);
-                        connServer.Start();
-                        connServer.Wait();
-                    }
-                }
-            });
-
-            chkConnectionServer.Start();
+            client.HeartBeat();
         }
 
 
@@ -221,8 +200,8 @@ namespace CniVision
         private void InitializeTools()
         {
 
-            mergeTool = new CniMerge();
-            mergeTool.LoadMergeRegion();
+            //mergeTool = new CniMerge();
+            CniMerge.LoadMergeRegion();
             toolProcess = new CniToolProcess();
             toolProcess.Ran += ToolProcessRan;
         }
@@ -277,18 +256,6 @@ namespace CniVision
             syncContext.Post(delegate
             {
                 lblTriggerCount.Text = $"Trigger Count : {iTrigCount}";
-            }, null);
-        }
-
-        // 택타임 리셋
-        private void btnTactTimeReset_Click(object sender, EventArgs e)
-        {
-            iTactTime = 0;
-            iDataCount = 0;
-            syncContext.Post(delegate
-            {
-                lblTactTime.Text = $"Time : {iTactTime} ms";
-                lblDataCount.Text = $"찾은 개수 : {iDataCount}";
             }, null);
         }
 
@@ -362,7 +329,7 @@ namespace CniVision
             if (frmMergeToolSetting == null)
             {
                 ChangeCameraTriggerModel(CogAcqTriggerModelConstants.Manual);
-                frmMergeToolSetting = new frmMerge(cameras, mergeTool, images, cRecordDisplay.Image);
+                frmMergeToolSetting = new frmMerge(cameras, images, cRecordDisplay.Image);
                 frmMergeToolSetting.FormClosed += FrmMergeToolSetting_FormClosed;
                 frmMergeToolSetting.Show();
             }
@@ -519,14 +486,14 @@ namespace CniVision
             }
 
             // 이미지 자름
-            List<ICogImage> clipImages = mergeTool.ImageClipConvert(images.ToList());
+            List<ICogImage> clipImages = CniMerge.ImageClipConvert(images.ToList());
 
             // ICogImage 배열을 Bitmap 리스트로 변환
-            List<Bitmap> bitmapList = mergeTool.ICogImageToBitmapConvert(clipImages);
+            List<Bitmap> bitmapList = CniMerge.ICogImageToBitmapConvert(clipImages);
 
             // 이미지 병합
             WriteLog("이미지 병합 시작", false);
-            Bitmap bImage = mergeTool.Merge(bitmapList);
+            Bitmap bImage = CniMerge.Merge(bitmapList);
             WriteLog("이미지 병합 완료", false);
 
             CogImage8Grey cImage8Grey = new CogImage8Grey(bImage);  // Bitmap에서 cogimage로 변환
@@ -678,7 +645,7 @@ namespace CniVision
 
 
             // 연결 중일 때만 데이터 전송
-            if (IsConnect)
+            if (client.IsConnected)
             {
                 string data = "";
                 if (state)
@@ -693,7 +660,7 @@ namespace CniVision
                 {
                     data = "NoRead";
                 }
-                //client.Send(data);
+                client.Send(data);
             }
 
         }
@@ -713,7 +680,6 @@ namespace CniVision
                 WriteLog($"{client.ServerIP} 데이터 전송 실패", false);
             }
 
-            IsConnect = state;
         }
         // 서버 연결 해제 
         private void Client_ServerDisconnected(bool state)
@@ -743,33 +709,10 @@ namespace CniVision
                 WriteLog($"{client.ServerIP} 연결 재시도", false);
             }
 
-            IsConnect = state;
+            client.IsConnected = state;
 
         }
 
-        #endregion
-        #region 네트워크 함수
-        private bool ServerConnect()
-        {
-            bool state = false;
-            try
-            {
-                while (!IsConnect)
-                {
-                    WriteLog($"{client.ServerIP} 서버 연결 시도 중...", false);
-                    client.Connect(client.ServerIP, client.ServerPort);
-                    Thread.Sleep(2000);                              //연결 실패시 2000ms 주기로 연결 재시도
-                }
-                state = true;
-            }
-            catch (Exception ex)
-            {
-                CniLog.WriteLog(ex);
-                state = false;
-            }
-
-            return state;
-        }
         #endregion
 
         #endregion

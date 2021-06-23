@@ -18,15 +18,15 @@ namespace CniVision
     {
         private SynchronizationContext syncContext = SynchronizationContext.Current;
         private CniCamera[] cams = null;                                                    // 연결된 카메라
-        private CniMerge mergeTool = null;                                                  // 병합 도구 
+        //private CniMerge mergeTool = null;                                                  // 병합 도구 
         private ICogImage[] images = null;                                                  // 촬영된 이미지들
         private ICogImage mergeImage = null;                                                // 병합된 이미지
 
         // 기본 생성자
-        public frmMerge(CniCamera[] cams, CniMerge mergeTool, ICogImage[] images, ICogImage mergeImage)
+        public frmMerge(CniCamera[] cams, ICogImage[] images, ICogImage mergeImage)
         {
             this.cams = cams;
-            this.mergeTool = mergeTool;
+            //this.mergeTool = mergeTool;
             this.images = images;
             this.mergeImage = mergeImage;
             InitializeComponent();
@@ -63,17 +63,17 @@ namespace CniVision
                         case 0:
                             cRecDisp1.Image = images[i];
                             cRecDisp1.Fit(false);
-                            cRecDisp1.InteractiveGraphics.Add(((mergeTool.cMergeRegions.Tools[i] as CogIPOneImageTool).Region as CogRectangleAffine), "", false);
+                            cRecDisp1.InteractiveGraphics.Add(((CniMerge.cMergeRegions.Tools[i] as CogIPOneImageTool).Region as CogRectangleAffine), "", false);
                             break;
                         case 1:
                             cRecDisp2.Image = images[i];
                             cRecDisp3.Fit(false);
-                            cRecDisp2.InteractiveGraphics.Add(((mergeTool.cMergeRegions.Tools[i] as CogIPOneImageTool).Region as CogRectangleAffine), "", false);
+                            cRecDisp2.InteractiveGraphics.Add(((CniMerge.cMergeRegions.Tools[i] as CogIPOneImageTool).Region as CogRectangleAffine), "", false);
                             break;
                         case 2:
                             cRecDisp3.Image = images[i];
                             cRecDisp3.Fit(false);
-                            cRecDisp3.InteractiveGraphics.Add(((mergeTool.cMergeRegions.Tools[i] as CogIPOneImageTool).Region as CogRectangleAffine), "", false);
+                            cRecDisp3.InteractiveGraphics.Add(((CniMerge.cMergeRegions.Tools[i] as CogIPOneImageTool).Region as CogRectangleAffine), "", false);
                             break;
                     }
                 }
@@ -189,17 +189,17 @@ namespace CniVision
                         case 0:
                             cRecDisp1.Image = images[i];
                             cRecDisp1.Fit(false);
-                            cRecDisp1.InteractiveGraphics.Add(((mergeTool.cMergeRegions.Tools[i] as CogIPOneImageTool).Region as CogRectangleAffine), "", false);
+                            cRecDisp1.InteractiveGraphics.Add(((CniMerge.cMergeRegions.Tools[i] as CogIPOneImageTool).Region as CogRectangleAffine), "", false);
                             break;
                         case 1:
                             cRecDisp2.Image = images[i];
                             cRecDisp2.Fit(false);
-                            cRecDisp2.InteractiveGraphics.Add(((mergeTool.cMergeRegions.Tools[i] as CogIPOneImageTool).Region as CogRectangleAffine), "", false);
+                            cRecDisp2.InteractiveGraphics.Add(((CniMerge.cMergeRegions.Tools[i] as CogIPOneImageTool).Region as CogRectangleAffine), "", false);
                             break;
                         case 2:
                             cRecDisp3.Image = images[i];
                             cRecDisp3.Fit(false);
-                            cRecDisp3.InteractiveGraphics.Add(((mergeTool.cMergeRegions.Tools[i] as CogIPOneImageTool).Region as CogRectangleAffine), "", false);
+                            cRecDisp3.InteractiveGraphics.Add(((CniMerge.cMergeRegions.Tools[i] as CogIPOneImageTool).Region as CogRectangleAffine), "", false);
                             break;
                     }
                 }
@@ -224,7 +224,7 @@ namespace CniVision
 
         private void btnSaveRegion_Click(object sender, EventArgs e)
         {
-            mergeTool.SaveMergeRegion();
+            CniMerge.SaveMergeRegion();
         }
 
         // 촬영한 이미지 가져오는 함수
@@ -233,11 +233,11 @@ namespace CniVision
             images = arrImg;
 
             // 이미지 자름
-            List<ICogImage> clipImages = mergeTool.ImageClipConvert(images.ToList());
+            List<ICogImage> clipImages = CniMerge.ImageClipConvert(images.ToList());
 
-            List<Bitmap> bitmapList = mergeTool.ICogImageToBitmapConvert(clipImages);
+            List<Bitmap> bitmapList = CniMerge.ICogImageToBitmapConvert(clipImages);
 
-            Bitmap bImage = mergeTool.Merge(bitmapList);
+            Bitmap bImage = CniMerge.Merge(bitmapList);
 
             CogImage8Grey cImage8Grey = new CogImage8Grey(bImage);  // Bitmap에서 cogimage로 변환
 

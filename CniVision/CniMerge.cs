@@ -11,17 +11,17 @@ using Cognex.VisionPro.ImageProcessing;
 namespace CniVision
 {
 
-    public class CniMerge
+    public static class CniMerge
     {
 
-        public CogToolGroup cMergeRegions = null;             // 병합 이미지의 겹칠 영역
+        public static CogToolGroup cMergeRegions = null;             // 병합 이미지의 겹칠 영역
 
         /// <summary>
         /// 이미지 병합 함수
         /// </summary>
         /// <param name="images">이미지 배열</param>
         /// <returns></returns>
-        public Bitmap Merge(List<Bitmap> images)
+        public static Bitmap Merge(List<Bitmap> images)
         {
 
             if (images == null || images.Count < 1) return null;     // images null 및 개수 체크 null 또는 없으면 그대로 null 리턴
@@ -70,7 +70,7 @@ namespace CniVision
 
 
         // ICogImage 리스트를 Bitmap 리스트로 변환 함수
-        public List<Bitmap> ICogImageToBitmapConvert(List<ICogImage> images)
+        public static List<Bitmap> ICogImageToBitmapConvert(List<ICogImage> images)
         {
             List<Bitmap> bitmapList = new List<Bitmap>();
 
@@ -83,7 +83,7 @@ namespace CniVision
         }
 
         // 겹칠 이미지 제거 후 이미지 반환
-        public List<ICogImage> ImageClipConvert(List<ICogImage> images)
+        public static List<ICogImage> ImageClipConvert(List<ICogImage> images)
         {
             List<ICogImage> lstImage = new List<ICogImage>();
 
@@ -98,7 +98,7 @@ namespace CniVision
         }
 
         // 이미지 겹칠 영역 불러오기
-        public void LoadMergeRegion()
+        public static void LoadMergeRegion()
         {
             object objTG = CniToolProcess.LoadTool("MergeRegionsToolGroup");
 
@@ -109,7 +109,7 @@ namespace CniVision
 
         }
         // 이미지 겹칠 영역 저장하기
-        public void SaveMergeRegion()
+        public static void SaveMergeRegion()
         {
             CniToolProcess.SaveTool(cMergeRegions, "MergeRegionsToolGroup");
         }
