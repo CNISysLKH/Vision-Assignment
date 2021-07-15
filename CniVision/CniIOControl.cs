@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Collections;
+using System.Runtime.InteropServices;
 
 namespace CniVision
 {
@@ -12,14 +13,11 @@ namespace CniVision
     public class CniIOControl
     {
 
-        private short sCard;
-        private Timer tmInputCheck;
-        private Timer tmOuputCheck;
+        public static string[] Input = new string[16] { "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" };
+        public static string[] Output = new string[16] { "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" };
+        public static string[] Check_Input = new string[16] { "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" };
+        public static string[] Check_Output = new string[16] { "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" };
 
-        private InputSignal[] inSignal = new InputSignal[16];
-        private OutputSignal[] outSignal = new OutputSignal[16];
-
-        public bool ConnectionStatus { get; set; }                  // I/O보드와 연결 상태
 
         // 초기화
         public CniIOControl()
@@ -32,7 +30,7 @@ namespace CniVision
                 inSignal[i].Enable = bool.Parse(CniIniControl.IniReadValue("INPUTSIGNAL", $"INPUT{i}_ENABLE"));
                 inSignal[i].Polarity = bool.Parse(CniIniControl.IniReadValue("INPUTSIGNAL", $"INPUT{i}_POLARITY"));
                 inSignal[i].DebounceTime = int.Parse(CniIniControl.IniReadValue("INPUTSIGNAL", $"INPUT{i}_DEBOUNCETIME"));
-                inSignal[i].OutputSignal = int.Parse(CniIniControl.IniReadValue("INPUTSIGNAL", $"INPUT{i}_OUTPUTSIGNAL"));
+                //inSignal[i].OutputSignal = int.Parse(CniIniControl.IniReadValue("INPUTSIGNAL", $"INPUT{i}_OUTPUTSIGNAL"));
 
                 outSignal[i].Enable = bool.Parse(CniIniControl.IniReadValue("OUTPUTSIGNAL", $"OUTPUT{i}_ENABLE"));
                 outSignal[i].PulseWidth = int.Parse(CniIniControl.IniReadValue("OUTPUTSIGNAL", $"OUTPUT{i}_PULSEWIDTH"));
@@ -48,7 +46,7 @@ namespace CniVision
             tmInputCheck.Elapsed += TmInputCheck_Elapsed;
             tmOuputCheck.Elapsed += TmOuputCheck_Elapsed;
 
-            sCard = DASK.Register_Card(DASK.PCI_7230, 0);
+            sCard = CniIODllControl.Register_Card(CniIODllControl.PCI_7230, 0);
             if (sCard < 0)
             {
                 ConnectionStatus = false;
@@ -62,6 +60,19 @@ namespace CniVision
                 tmOuputCheck.Start();
             }
         }
+
+        private short sCard;
+        private Timer tmInputCheck;
+        private Timer tmOuputCheck;
+
+        private InputSignal[] inSignal = new InputSignal[16];
+        private OutputSignal[] outSignal = new OutputSignal[16];
+
+        // I/O보드와 연결 상태
+        public bool ConnectionStatus { get; set; }
+
+
+
 
         #region Signal 조작 함수
 
@@ -79,17 +90,17 @@ namespace CniVision
         }
 
         // Input에서 내보내는 Output 번호 설정
-        public void SetInputToOutputSignal(int inNum, int outNum)
-        {
-            inSignal[inNum].OutputSignal = outNum;
-            CniIniControl.IniWriteValue("INPUTSIGNAL", $"INPUT{inNum}_OUTPUTSIGNAL", outNum.ToString());
-        }
+        //public void SetInputToOutputSignal(int inNum, int outNum)
+        //{
+        //inSignal[inNum].OutputSignal = outNum;
+        //CniIniControl.IniWriteValue("INPUTSIGNAL", $"INPUT{inNum}_OUTPUTSIGNAL", outNum.ToString());
+        //}
 
         // Input에서 내보내는 Output 번호 가져오기
-        public int GetInputToOutputSignal(int inNum)
-        {
-            return inSignal[inNum].OutputSignal;
-        }
+        //public int GetInputToOutputSignal(int inNum)
+        //{
+        //    return inSignal[inNum].OutputSignal;
+        //}
 
         // 원하는 Input 극성 설정
         public void SetPolarity(int inNum, bool EdgeDirection)
@@ -168,29 +179,31 @@ namespace CniVision
         #region Signal 이벤트 함수
         private void InputSignal_Occured(int idx)
         {
-            int iSignal = inSignal[idx].OutputSignal;
-            DASK.Check_Output[iSignal] = "1";
-            outSignal[iSignal].OnSignal();
-            DASK.WritePort_Output((ushort)sCard, 0);
 
+            // 촬영 시작
+
+            //int iSignal = inSignal[idx].OutputSignal;
+            //Check_Output[iSignal] = "1";
+            //outSignal[iSignal].OnSignal();
+            //WritePort_Output((ushort)sCard, 0);
         }
 
         private void OutputSignal_Occured(int idx)
         {
-            DASK.Check_Output[idx] = "0";
-            DASK.WritePort_Output((ushort)sCard, 0);
+            Check_Output[idx] = "0";
+            CniIODllControl.WritePort_Output((ushort)sCard, 0, Check_Output);
         }
 
         private void OutputSignal_Opened(int idx)
         {
-            DASK.Check_Output[idx] = "1";
-            DASK.WritePort_Output((ushort)sCard, 0);
+            Check_Output[idx] = "1";
+            CniIODllControl.WritePort_Output((ushort)sCard, 0, Check_Output);
         }
 
         private void OutputSignal_Closed(int idx)
         {
-            DASK.Check_Output[idx] = "0";
-            DASK.WritePort_Output((ushort)sCard, 0);
+            Check_Output[idx] = "0";
+            CniIODllControl.WritePort_Output((ushort)sCard, 0, Check_Output);
         }
         #endregion
 
@@ -198,34 +211,34 @@ namespace CniVision
 
         private void TmInputCheck_Elapsed(object sender, ElapsedEventArgs e)
         {
-            DASK.ReadPort_Input((ushort)sCard, 0);
+            CniIODllControl.ReadPort_Input((ushort)sCard, 0, ref Input);
 
             for (int i = 0; i < 16; ++i)
             {
-                if (DASK.Check_Input[i] != DASK.Input[i])
+                if (Check_Input[i] != Input[i])
                 {
                     if (inSignal[i].Polarity)
                     {
-                        if (DASK.Check_Input[i] == "0" && DASK.Input[i] == "1")
+                        if (Check_Input[i] == "0" && Input[i] == "1")
                         {
-                            DASK.Check_Input[i] = "1";
+                            Check_Input[i] = "1";
                             inSignal[i].OnSignal();
                         }
-                        else if (DASK.Check_Input[i] == "1" && DASK.Input[i] == "0")
+                        else if (Check_Input[i] == "1" && Input[i] == "0")
                         {
-                            DASK.Check_Input[i] = "0";
+                            Check_Input[i] = "0";
                         }
                     }
                     else
                     {
-                        if (DASK.Check_Input[i] == "1" && DASK.Input[i] == "0")
+                        if (Check_Input[i] == "1" && Input[i] == "0")
                         {
-                            DASK.Check_Input[i] = "0";
+                            Check_Input[i] = "0";
                             inSignal[i].OnSignal();
                         }
-                        else if (DASK.Check_Input[i] == "0" && DASK.Input[i] == "1")
+                        else if (Check_Input[i] == "0" && Input[i] == "1")
                         {
-                            DASK.Check_Input[i] = "1";
+                            Check_Input[i] = "1";
                         }
                     }
 
@@ -240,7 +253,7 @@ namespace CniVision
 
         private void TmOuputCheck_Elapsed(object sender, ElapsedEventArgs e)
         {
-            DASK.ReadPort_Output((ushort)sCard, 0);
+            CniIODllControl.ReadPort_Output((ushort)sCard, 0, ref Output);
         }
 
         #endregion
@@ -249,8 +262,7 @@ namespace CniVision
 
         private void WriteOuput()
         {
-
-            DASK.WritePort_Output((ushort)sCard, 0);
+            CniIODllControl.WritePort_Output((ushort)sCard, 0, Check_Output);
         }
 
         #endregion
@@ -274,7 +286,7 @@ namespace CniVision
             Status = false;
             Polarity = true;
             DebounceTime = 1000;
-            OutputSignal = -1;
+            //OutputSignal = -1;
 
             tm.Interval = DebounceTime;
             tm.AutoReset = false;
@@ -292,7 +304,7 @@ namespace CniVision
         // 단위 ms
         public int DebounceTime { get; set; }
         // 몇 번째 아웃풋에 내보낼 껀지
-        public int OutputSignal { get; set; }
+        //public int OutputSignal { get; set; }
 
         private Timer tm = new Timer();
 
@@ -312,7 +324,6 @@ namespace CniVision
         // Debounce Time 끝났을 경우
         private void tm_Elapsed(object sender, ElapsedEventArgs e)
         {
-
             Status = false;
         }
 
@@ -430,4 +441,70 @@ namespace CniVision
     }
     #endregion
     #endregion
+
+    public class CniIODllControl
+    {
+
+        public const ushort PCI_7230 = 6;
+
+
+        [DllImport("PCI-Dask64.dll")]
+        public static extern short Register_Card(ushort CardType, ushort card_num);
+        [DllImport("PCI-Dask64.dll")]
+        public static extern short Release_Card(ushort CardNumber);
+        [DllImport("PCI-Dask64.dll")]
+        public static extern short DO_WritePort(ushort CardNumber, byte Port, uint Value);
+        [DllImport("PCI-Dask64.dll")]
+        public static extern short DO_ReadPort(ushort CardNumber, ushort Port, out uint Value);
+        [DllImport("PCI-Dask64.dll")]
+        public static extern short DI_ReadPort(ushort CardNumber, ushort Port, out uint Value);
+
+
+        public static short WritePort_Output(ushort CardNumber, byte Port, string[] CheckOutput)
+        {
+
+            string sValue = "";
+            for (int i = 15; i >= 0; --i)
+            {
+                sValue += CheckOutput[i];
+            }
+            uint Value = (uint)Convert.ToInt16(sValue, 2);
+
+            return DO_WritePort(CardNumber, Port, Value);
+        }
+
+        public static short ReadPort_Output(ushort CardNumber, byte Port, ref string[] Output)
+        {
+            short ret;
+            uint in_Value;
+            ret = DO_ReadPort(CardNumber, Port, out in_Value);
+
+            string sValue = Convert.ToString(in_Value, 2).PadLeft(16, '0');
+
+            for (int i = 15; i >= 0; --i)
+            {
+                Output[i] = sValue.Substring(15 - i, 1);
+
+            }
+            return ret;
+        }
+
+        public static short ReadPort_Input(ushort CardNumber, byte Port, ref string[] Input)
+        {
+            short ret;
+            uint in_Value;
+            ret = DI_ReadPort(CardNumber, Port, out in_Value);
+
+            string sValue = Convert.ToString(in_Value, 2).PadLeft(16, '0');
+            for (int i = 15; i >= 0; --i)
+            {
+                Input[i] = sValue.Substring(15 - i, 1);
+
+            }
+            return ret;
+        }
+
+
+
+    }
 }

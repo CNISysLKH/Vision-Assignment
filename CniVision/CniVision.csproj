@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CniVision</RootNamespace>
     <AssemblyName>CniVision</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
@@ -73,25 +73,26 @@
     <ApplicationIcon>Logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Cognex.VisionPro, Version=61.1.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
-    <Reference Include="Cognex.VisionPro.Blob, Version=61.1.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
-    <Reference Include="Cognex.VisionPro.Controls, Version=61.1.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
-    <Reference Include="Cognex.VisionPro.Core, Version=61.1.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
-    <Reference Include="Cognex.VisionPro.CorePlus, Version=61.1.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
-    <Reference Include="Cognex.VisionPro.Database, Version=61.1.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
-    <Reference Include="Cognex.VisionPro.Display.Controls, Version=61.1.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
-    <Reference Include="Cognex.VisionPro.FGGigE, Version=61.1.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
-    <Reference Include="Cognex.VisionPro.ID, Version=61.1.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
-    <Reference Include="Cognex.VisionPro.ImageFile, Version=61.1.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
-    <Reference Include="Cognex.VisionPro.ImageProcessing, Version=61.1.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
-    <Reference Include="Cognex.VisionPro.Inspection, Version=61.1.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
-    <Reference Include="Cognex.VisionPro.Inspection.Controls, Version=61.1.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
-    <Reference Include="Cognex.VisionPro.ToolGroup, Version=61.1.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
-    <Reference Include="Cognex.VisionPro.ToolGroup.Controls, Version=61.1.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
-    <Reference Include="Cognex.VisionPro3D, Version=61.1.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
-    <Reference Include="Cognex.VisionPro3D.Core, Version=61.1.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
-    <Reference Include="Cognex.VisionPro3D.Display.Controls, Version=61.1.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
-    <Reference Include="Cognex.VisionPro3D.Graphic, Version=61.1.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
+    <Reference Include="Cognex.VisionPro, Version=73.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
+    <Reference Include="Cognex.VisionPro.Blob, Version=73.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
+    <Reference Include="Cognex.VisionPro.Controls, Version=73.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
+    <Reference Include="Cognex.VisionPro.Core, Version=73.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
+    <Reference Include="Cognex.VisionPro.CorePlus, Version=73.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
+    <Reference Include="Cognex.VisionPro.Database, Version=73.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
+    <Reference Include="Cognex.VisionPro.Display.Controls, Version=73.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
+    <Reference Include="Cognex.VisionPro.FGGigE, Version=73.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
+    <Reference Include="Cognex.VisionPro.ID, Version=73.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
+    <Reference Include="Cognex.VisionPro.ImageFile, Version=73.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
+    <Reference Include="Cognex.VisionPro.ImageProcessing, Version=73.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
+    <Reference Include="Cognex.VisionPro.Inspection, Version=73.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
+    <Reference Include="Cognex.VisionPro.Inspection.Controls, Version=73.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
+    <Reference Include="Cognex.VisionPro.ToolGroup, Version=73.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
+    <Reference Include="Cognex.VisionPro.ToolGroup.Controls, Version=73.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
+    <Reference Include="Cognex.VisionPro3D, Version=73.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
+    <Reference Include="Cognex.VisionPro3D.Controls, Version=73.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
+    <Reference Include="Cognex.VisionPro3D.Core, Version=73.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
+    <Reference Include="Cognex.VisionPro3D.Display.Controls, Version=73.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
+    <Reference Include="Cognex.VisionPro3D.Graphic, Version=73.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="QWhale.Common, Version=1.62.4104.36375, Culture=neutral, PublicKeyToken=da632fd1713dff10" />
@@ -121,7 +122,6 @@
     <Compile Include="CniMerge.cs" />
     <Compile Include="CniTcpClient.cs" />
     <Compile Include="CniToolProcess.cs" />
-    <Compile Include="DASK.cs" />
     <Compile Include="frmCamera.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -152,6 +152,7 @@
     <Compile Include="frmTools.Designer.cs">
       <DependentUpon>frmTools.cs</DependentUpon>
     </Compile>
+    <Compile Include="IO\CniIOControl.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmCamera.resx">

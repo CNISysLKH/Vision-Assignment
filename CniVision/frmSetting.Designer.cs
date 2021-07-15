@@ -40,30 +40,32 @@
             this.btnSaveDataDirectoryDialog = new System.Windows.Forms.Button();
             this.lblSaveDataDirectory = new System.Windows.Forms.Label();
             this.gbxIOBoradSignalSetting = new System.Windows.Forms.GroupBox();
+            this.gbxOutputAction = new System.Windows.Forms.GroupBox();
+            this.rdbOutputClose = new System.Windows.Forms.RadioButton();
+            this.rdbOutputOpen = new System.Windows.Forms.RadioButton();
+            this.cmbOutputAction = new System.Windows.Forms.ComboBox();
+            this.gbxInputPolarity = new System.Windows.Forms.GroupBox();
+            this.rdbInputFallingEdge = new System.Windows.Forms.RadioButton();
+            this.rdbInputRisingEdge = new System.Windows.Forms.RadioButton();
+            this.cmbInputPolarity = new System.Windows.Forms.ComboBox();
             this.gbxInputToOutputSignal = new System.Windows.Forms.GroupBox();
             this.lblOutput = new System.Windows.Forms.Label();
             this.lblInput = new System.Windows.Forms.Label();
             this.cmbOutputSignal = new System.Windows.Forms.ComboBox();
             this.cmbInputSignal = new System.Windows.Forms.ComboBox();
-            this.gbxInputPolarity = new System.Windows.Forms.GroupBox();
-            this.cmbInputPolarity = new System.Windows.Forms.ComboBox();
-            this.rdbInputRisingEdge = new System.Windows.Forms.RadioButton();
-            this.rdbInputFallingEdge = new System.Windows.Forms.RadioButton();
-            this.gbxOutputAction = new System.Windows.Forms.GroupBox();
-            this.rdbOutputClose = new System.Windows.Forms.RadioButton();
-            this.rdbOutputOpen = new System.Windows.Forms.RadioButton();
-            this.cmbOutputAction = new System.Windows.Forms.ComboBox();
             this.grbSaveSetting.SuspendLayout();
             this.grbSaveImageDirectory.SuspendLayout();
             this.grbSaveDataDirectory.SuspendLayout();
             this.gbxIOBoradSignalSetting.SuspendLayout();
-            this.gbxInputToOutputSignal.SuspendLayout();
-            this.gbxInputPolarity.SuspendLayout();
             this.gbxOutputAction.SuspendLayout();
+            this.gbxInputPolarity.SuspendLayout();
+            this.gbxInputToOutputSignal.SuspendLayout();
             this.SuspendLayout();
             // 
             // grbSaveSetting
             // 
+            this.grbSaveSetting.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.grbSaveSetting.Controls.Add(this.ckbSaveTXT);
             this.grbSaveSetting.Controls.Add(this.ckbSaveResultImage);
             this.grbSaveSetting.Controls.Add(this.ckbSaveCSV);
@@ -71,7 +73,7 @@
             this.grbSaveSetting.Location = new System.Drawing.Point(12, 12);
             this.grbSaveSetting.Name = "grbSaveSetting";
             this.grbSaveSetting.Padding = new System.Windows.Forms.Padding(10);
-            this.grbSaveSetting.Size = new System.Drawing.Size(269, 79);
+            this.grbSaveSetting.Size = new System.Drawing.Size(270, 79);
             this.grbSaveSetting.TabIndex = 0;
             this.grbSaveSetting.TabStop = false;
             this.grbSaveSetting.Text = "저장 설정";
@@ -122,11 +124,13 @@
             // 
             // grbSaveImageDirectory
             // 
+            this.grbSaveImageDirectory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.grbSaveImageDirectory.Controls.Add(this.btnSaveImageDirectoryDialog);
             this.grbSaveImageDirectory.Controls.Add(this.lblSaveImageDirectory);
             this.grbSaveImageDirectory.Location = new System.Drawing.Point(12, 98);
             this.grbSaveImageDirectory.Name = "grbSaveImageDirectory";
-            this.grbSaveImageDirectory.Size = new System.Drawing.Size(269, 57);
+            this.grbSaveImageDirectory.Size = new System.Drawing.Size(270, 57);
             this.grbSaveImageDirectory.TabIndex = 1;
             this.grbSaveImageDirectory.TabStop = false;
             this.grbSaveImageDirectory.Text = "이미지 저장 위치";
@@ -146,7 +150,7 @@
             this.lblSaveImageDirectory.AutoEllipsis = true;
             this.lblSaveImageDirectory.BackColor = System.Drawing.SystemColors.Window;
             this.lblSaveImageDirectory.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblSaveImageDirectory.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblSaveImageDirectory.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblSaveImageDirectory.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblSaveImageDirectory.Location = new System.Drawing.Point(7, 21);
             this.lblSaveImageDirectory.Name = "lblSaveImageDirectory";
@@ -157,11 +161,13 @@
             // 
             // grbSaveDataDirectory
             // 
+            this.grbSaveDataDirectory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.grbSaveDataDirectory.Controls.Add(this.btnSaveDataDirectoryDialog);
             this.grbSaveDataDirectory.Controls.Add(this.lblSaveDataDirectory);
             this.grbSaveDataDirectory.Location = new System.Drawing.Point(12, 161);
             this.grbSaveDataDirectory.Name = "grbSaveDataDirectory";
-            this.grbSaveDataDirectory.Size = new System.Drawing.Size(269, 57);
+            this.grbSaveDataDirectory.Size = new System.Drawing.Size(270, 57);
             this.grbSaveDataDirectory.TabIndex = 2;
             this.grbSaveDataDirectory.TabStop = false;
             this.grbSaveDataDirectory.Text = "결과 데이터 저장 위치";
@@ -181,7 +187,7 @@
             this.lblSaveDataDirectory.AutoEllipsis = true;
             this.lblSaveDataDirectory.BackColor = System.Drawing.SystemColors.Window;
             this.lblSaveDataDirectory.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblSaveDataDirectory.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblSaveDataDirectory.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblSaveDataDirectory.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblSaveDataDirectory.Location = new System.Drawing.Point(7, 21);
             this.lblSaveDataDirectory.Name = "lblSaveDataDirectory";
@@ -195,111 +201,12 @@
             this.gbxIOBoradSignalSetting.Controls.Add(this.gbxOutputAction);
             this.gbxIOBoradSignalSetting.Controls.Add(this.gbxInputPolarity);
             this.gbxIOBoradSignalSetting.Controls.Add(this.gbxInputToOutputSignal);
-            this.gbxIOBoradSignalSetting.Location = new System.Drawing.Point(12, 225);
+            this.gbxIOBoradSignalSetting.Location = new System.Drawing.Point(12, 224);
             this.gbxIOBoradSignalSetting.Name = "gbxIOBoradSignalSetting";
             this.gbxIOBoradSignalSetting.Size = new System.Drawing.Size(269, 212);
             this.gbxIOBoradSignalSetting.TabIndex = 3;
             this.gbxIOBoradSignalSetting.TabStop = false;
             this.gbxIOBoradSignalSetting.Text = "I/O 보드 세팅";
-            // 
-            // gbxInputToOutputSignal
-            // 
-            this.gbxInputToOutputSignal.Controls.Add(this.lblOutput);
-            this.gbxInputToOutputSignal.Controls.Add(this.lblInput);
-            this.gbxInputToOutputSignal.Controls.Add(this.cmbOutputSignal);
-            this.gbxInputToOutputSignal.Controls.Add(this.cmbInputSignal);
-            this.gbxInputToOutputSignal.Location = new System.Drawing.Point(7, 21);
-            this.gbxInputToOutputSignal.Name = "gbxInputToOutputSignal";
-            this.gbxInputToOutputSignal.Size = new System.Drawing.Size(256, 75);
-            this.gbxInputToOutputSignal.TabIndex = 0;
-            this.gbxInputToOutputSignal.TabStop = false;
-            this.gbxInputToOutputSignal.Text = "Input To Output";
-            // 
-            // lblOutput
-            // 
-            this.lblOutput.AutoSize = true;
-            this.lblOutput.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblOutput.Location = new System.Drawing.Point(6, 46);
-            this.lblOutput.Name = "lblOutput";
-            this.lblOutput.Size = new System.Drawing.Size(41, 12);
-            this.lblOutput.TabIndex = 1;
-            this.lblOutput.Text = "Output";
-            // 
-            // lblInput
-            // 
-            this.lblInput.AutoSize = true;
-            this.lblInput.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblInput.Location = new System.Drawing.Point(6, 20);
-            this.lblInput.Name = "lblInput";
-            this.lblInput.Size = new System.Drawing.Size(32, 12);
-            this.lblInput.TabIndex = 1;
-            this.lblInput.Text = "Input";
-            // 
-            // cmbOutputSignal
-            // 
-            this.cmbOutputSignal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbOutputSignal.FormattingEnabled = true;
-            this.cmbOutputSignal.Location = new System.Drawing.Point(58, 43);
-            this.cmbOutputSignal.Name = "cmbOutputSignal";
-            this.cmbOutputSignal.Size = new System.Drawing.Size(192, 20);
-            this.cmbOutputSignal.TabIndex = 0;
-            this.cmbOutputSignal.SelectedIndexChanged += new System.EventHandler(this.cmbOutputSignal_SelectedIndexChanged);
-            // 
-            // cmbInputSignal
-            // 
-            this.cmbInputSignal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbInputSignal.FormattingEnabled = true;
-            this.cmbInputSignal.Location = new System.Drawing.Point(58, 17);
-            this.cmbInputSignal.Name = "cmbInputSignal";
-            this.cmbInputSignal.Size = new System.Drawing.Size(192, 20);
-            this.cmbInputSignal.TabIndex = 0;
-            this.cmbInputSignal.SelectedIndexChanged += new System.EventHandler(this.cmbInputSignal_SelectedIndexChanged);
-            // 
-            // gbxInputPolarity
-            // 
-            this.gbxInputPolarity.Controls.Add(this.rdbInputFallingEdge);
-            this.gbxInputPolarity.Controls.Add(this.rdbInputRisingEdge);
-            this.gbxInputPolarity.Controls.Add(this.cmbInputPolarity);
-            this.gbxInputPolarity.Location = new System.Drawing.Point(7, 103);
-            this.gbxInputPolarity.Name = "gbxInputPolarity";
-            this.gbxInputPolarity.Size = new System.Drawing.Size(256, 49);
-            this.gbxInputPolarity.TabIndex = 1;
-            this.gbxInputPolarity.TabStop = false;
-            this.gbxInputPolarity.Text = "Input 극성 설정";
-            // 
-            // cmbInputPolarity
-            // 
-            this.cmbInputPolarity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbInputPolarity.FormattingEnabled = true;
-            this.cmbInputPolarity.Location = new System.Drawing.Point(7, 21);
-            this.cmbInputPolarity.Name = "cmbInputPolarity";
-            this.cmbInputPolarity.Size = new System.Drawing.Size(137, 20);
-            this.cmbInputPolarity.TabIndex = 0;
-            this.cmbInputPolarity.SelectedIndexChanged += new System.EventHandler(this.cmbInputPolarity_SelectedIndexChanged);
-            // 
-            // rdbInputRisingEdge
-            // 
-            this.rdbInputRisingEdge.AutoSize = true;
-            this.rdbInputRisingEdge.Location = new System.Drawing.Point(150, 22);
-            this.rdbInputRisingEdge.Name = "rdbInputRisingEdge";
-            this.rdbInputRisingEdge.Size = new System.Drawing.Size(47, 16);
-            this.rdbInputRisingEdge.TabIndex = 1;
-            this.rdbInputRisingEdge.TabStop = true;
-            this.rdbInputRisingEdge.Text = "상승";
-            this.rdbInputRisingEdge.UseVisualStyleBackColor = true;
-            this.rdbInputRisingEdge.CheckedChanged += new System.EventHandler(this.rdbInputRisingEdge_CheckedChanged);
-            // 
-            // rdbInputFallingEdge
-            // 
-            this.rdbInputFallingEdge.AutoSize = true;
-            this.rdbInputFallingEdge.Location = new System.Drawing.Point(203, 22);
-            this.rdbInputFallingEdge.Name = "rdbInputFallingEdge";
-            this.rdbInputFallingEdge.Size = new System.Drawing.Size(47, 16);
-            this.rdbInputFallingEdge.TabIndex = 1;
-            this.rdbInputFallingEdge.TabStop = true;
-            this.rdbInputFallingEdge.Text = "하강";
-            this.rdbInputFallingEdge.UseVisualStyleBackColor = true;
-            this.rdbInputFallingEdge.CheckedChanged += new System.EventHandler(this.rdbInputFallingEdge_CheckedChanged);
             // 
             // gbxOutputAction
             // 
@@ -347,18 +254,115 @@
             this.cmbOutputAction.TabIndex = 0;
             this.cmbOutputAction.SelectedIndexChanged += new System.EventHandler(this.cmbOutputAction_SelectedIndexChanged);
             // 
+            // gbxInputPolarity
+            // 
+            this.gbxInputPolarity.Controls.Add(this.rdbInputFallingEdge);
+            this.gbxInputPolarity.Controls.Add(this.rdbInputRisingEdge);
+            this.gbxInputPolarity.Controls.Add(this.cmbInputPolarity);
+            this.gbxInputPolarity.Location = new System.Drawing.Point(7, 103);
+            this.gbxInputPolarity.Name = "gbxInputPolarity";
+            this.gbxInputPolarity.Size = new System.Drawing.Size(256, 49);
+            this.gbxInputPolarity.TabIndex = 1;
+            this.gbxInputPolarity.TabStop = false;
+            this.gbxInputPolarity.Text = "Input 극성 설정";
+            // 
+            // rdbInputFallingEdge
+            // 
+            this.rdbInputFallingEdge.AutoSize = true;
+            this.rdbInputFallingEdge.Location = new System.Drawing.Point(203, 22);
+            this.rdbInputFallingEdge.Name = "rdbInputFallingEdge";
+            this.rdbInputFallingEdge.Size = new System.Drawing.Size(47, 16);
+            this.rdbInputFallingEdge.TabIndex = 1;
+            this.rdbInputFallingEdge.TabStop = true;
+            this.rdbInputFallingEdge.Text = "하강";
+            this.rdbInputFallingEdge.UseVisualStyleBackColor = true;
+            this.rdbInputFallingEdge.CheckedChanged += new System.EventHandler(this.rdbInputFallingEdge_CheckedChanged);
+            // 
+            // rdbInputRisingEdge
+            // 
+            this.rdbInputRisingEdge.AutoSize = true;
+            this.rdbInputRisingEdge.Location = new System.Drawing.Point(150, 22);
+            this.rdbInputRisingEdge.Name = "rdbInputRisingEdge";
+            this.rdbInputRisingEdge.Size = new System.Drawing.Size(47, 16);
+            this.rdbInputRisingEdge.TabIndex = 1;
+            this.rdbInputRisingEdge.TabStop = true;
+            this.rdbInputRisingEdge.Text = "상승";
+            this.rdbInputRisingEdge.UseVisualStyleBackColor = true;
+            this.rdbInputRisingEdge.CheckedChanged += new System.EventHandler(this.rdbInputRisingEdge_CheckedChanged);
+            // 
+            // cmbInputPolarity
+            // 
+            this.cmbInputPolarity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbInputPolarity.FormattingEnabled = true;
+            this.cmbInputPolarity.Location = new System.Drawing.Point(7, 21);
+            this.cmbInputPolarity.Name = "cmbInputPolarity";
+            this.cmbInputPolarity.Size = new System.Drawing.Size(137, 20);
+            this.cmbInputPolarity.TabIndex = 0;
+            this.cmbInputPolarity.SelectedIndexChanged += new System.EventHandler(this.cmbInputPolarity_SelectedIndexChanged);
+            // 
+            // gbxInputToOutputSignal
+            // 
+            this.gbxInputToOutputSignal.Controls.Add(this.lblOutput);
+            this.gbxInputToOutputSignal.Controls.Add(this.lblInput);
+            this.gbxInputToOutputSignal.Controls.Add(this.cmbOutputSignal);
+            this.gbxInputToOutputSignal.Controls.Add(this.cmbInputSignal);
+            this.gbxInputToOutputSignal.Location = new System.Drawing.Point(7, 21);
+            this.gbxInputToOutputSignal.Name = "gbxInputToOutputSignal";
+            this.gbxInputToOutputSignal.Size = new System.Drawing.Size(256, 75);
+            this.gbxInputToOutputSignal.TabIndex = 0;
+            this.gbxInputToOutputSignal.TabStop = false;
+            this.gbxInputToOutputSignal.Text = "Input To Output";
+            // 
+            // lblOutput
+            // 
+            this.lblOutput.AutoSize = true;
+            this.lblOutput.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblOutput.Location = new System.Drawing.Point(6, 46);
+            this.lblOutput.Name = "lblOutput";
+            this.lblOutput.Size = new System.Drawing.Size(41, 12);
+            this.lblOutput.TabIndex = 1;
+            this.lblOutput.Text = "Output";
+            // 
+            // lblInput
+            // 
+            this.lblInput.AutoSize = true;
+            this.lblInput.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblInput.Location = new System.Drawing.Point(6, 20);
+            this.lblInput.Name = "lblInput";
+            this.lblInput.Size = new System.Drawing.Size(32, 12);
+            this.lblInput.TabIndex = 1;
+            this.lblInput.Text = "Input";
+            // 
+            // cmbOutputSignal
+            // 
+            this.cmbOutputSignal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbOutputSignal.FormattingEnabled = true;
+            this.cmbOutputSignal.Location = new System.Drawing.Point(58, 43);
+            this.cmbOutputSignal.Name = "cmbOutputSignal";
+            this.cmbOutputSignal.Size = new System.Drawing.Size(192, 20);
+            this.cmbOutputSignal.TabIndex = 0;
+            // 
+            // cmbInputSignal
+            // 
+            this.cmbInputSignal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbInputSignal.FormattingEnabled = true;
+            this.cmbInputSignal.Location = new System.Drawing.Point(58, 17);
+            this.cmbInputSignal.Name = "cmbInputSignal";
+            this.cmbInputSignal.Size = new System.Drawing.Size(192, 20);
+            this.cmbInputSignal.TabIndex = 0;
+            this.cmbInputSignal.SelectedIndexChanged += new System.EventHandler(this.cmbInputSignal_SelectedIndexChanged);
+            // 
             // frmSetting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 447);
+            this.ClientSize = new System.Drawing.Size(293, 444);
             this.Controls.Add(this.gbxIOBoradSignalSetting);
             this.Controls.Add(this.grbSaveDataDirectory);
             this.Controls.Add(this.grbSaveImageDirectory);
             this.Controls.Add(this.grbSaveSetting);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(306, 476);
             this.Name = "frmSetting";
             this.Text = "설정 창";
             this.Load += new System.EventHandler(this.frmSetting_Load);
@@ -367,12 +371,12 @@
             this.grbSaveImageDirectory.ResumeLayout(false);
             this.grbSaveDataDirectory.ResumeLayout(false);
             this.gbxIOBoradSignalSetting.ResumeLayout(false);
-            this.gbxInputToOutputSignal.ResumeLayout(false);
-            this.gbxInputToOutputSignal.PerformLayout();
-            this.gbxInputPolarity.ResumeLayout(false);
-            this.gbxInputPolarity.PerformLayout();
             this.gbxOutputAction.ResumeLayout(false);
             this.gbxOutputAction.PerformLayout();
+            this.gbxInputPolarity.ResumeLayout(false);
+            this.gbxInputPolarity.PerformLayout();
+            this.gbxInputToOutputSignal.ResumeLayout(false);
+            this.gbxInputToOutputSignal.PerformLayout();
             this.ResumeLayout(false);
 
         }

@@ -132,26 +132,26 @@ namespace CniVision
         {
             int inSignalIndex = cmbInputSignal.SelectedIndex;
 
-            int outSignalNum = ioControl.GetInputToOutputSignal(inSignalIndex);
+            //int outSignalNum = ioControl.GetInputToOutputSignal(inSignalIndex);
 
-            if (outSignalNum != -1)
-            {
-                cmbOutputSignal.SelectedIndex = outSignalNum;
-            }
-            else
-            {
-                cmbOutputSignal.SelectedIndex = 0;
-            }
+            //if (outSignalNum != -1)
+            //{
+            //    cmbOutputSignal.SelectedIndex = outSignalNum;
+            //}
+            //else
+            //{
+            //    cmbOutputSignal.SelectedIndex = 0;
+            //}
 
         }
         // Input 순번의 출력 Output 설정
-        private void cmbOutputSignal_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int outSignalIndex = cmbOutputSignal.SelectedIndex;
+        //private void cmbOutputSignal_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    int outSignalIndex = cmbOutputSignal.SelectedIndex;
 
-            ioControl.SetInputToOutputSignal(cmbInputSignal.SelectedIndex, outSignalIndex);
+        //ioControl.SetInputToOutputSignal(cmbInputSignal.SelectedIndex, outSignalIndex);
 
-        }
+        //}
         // Input 극성 콤보박스 목록 변경시
         private void cmbInputPolarity_SelectedIndexChanged(object sender, EventArgs e)
         {

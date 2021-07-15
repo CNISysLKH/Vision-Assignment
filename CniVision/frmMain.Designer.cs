@@ -48,7 +48,6 @@
             this.pnlTriggerCount = new System.Windows.Forms.Panel();
             this.lblTriggerCount = new System.Windows.Forms.Label();
             this.btnTriggerCountReset = new System.Windows.Forms.Button();
-            this.lblStatus = new System.Windows.Forms.Label();
             this.tlpControlsButton = new System.Windows.Forms.TableLayoutPanel();
             this.btnMergeControl = new System.Windows.Forms.Button();
             this.btnSetupControl = new System.Windows.Forms.Button();
@@ -99,9 +98,9 @@
             this.lblTitle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblTitle.Font = new System.Drawing.Font("Yu Gothic UI", 35F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblTitle.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.lblTitle.Location = new System.Drawing.Point(134, 0);
+            this.lblTitle.Location = new System.Drawing.Point(124, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(884, 104);
+            this.lblTitle.Size = new System.Drawing.Size(894, 104);
             this.lblTitle.TabIndex = 2;
             this.lblTitle.Text = "C&I Vision";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -111,6 +110,7 @@
             // 
             this.lblTime.BackColor = System.Drawing.Color.White;
             this.lblTime.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblTime.Font = new System.Drawing.Font("굴림", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblTime.Location = new System.Drawing.Point(1018, 0);
             this.lblTime.Name = "lblTime";
             this.lblTime.Size = new System.Drawing.Size(190, 104);
@@ -124,8 +124,8 @@
             this.picLogo.Dock = System.Windows.Forms.DockStyle.Left;
             this.picLogo.Location = new System.Drawing.Point(0, 0);
             this.picLogo.Name = "picLogo";
-            this.picLogo.Size = new System.Drawing.Size(134, 104);
-            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.picLogo.Padding = new System.Windows.Forms.Padding(2);
+            this.picLogo.Size = new System.Drawing.Size(124, 104);
             this.picLogo.TabIndex = 0;
             this.picLogo.TabStop = false;
             this.picLogo.DoubleClick += new System.EventHandler(this.picLogo_DoubleClick);
@@ -180,7 +180,7 @@
             // lblTactTime
             // 
             this.lblTactTime.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTactTime.Font = new System.Drawing.Font("Gulim", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblTactTime.Font = new System.Drawing.Font("굴림", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblTactTime.Location = new System.Drawing.Point(246, 5);
             this.lblTactTime.Name = "lblTactTime";
             this.lblTactTime.Padding = new System.Windows.Forms.Padding(5);
@@ -192,7 +192,7 @@
             // lblDataCount
             // 
             this.lblDataCount.Dock = System.Windows.Forms.DockStyle.Left;
-            this.lblDataCount.Font = new System.Drawing.Font("Gulim", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblDataCount.Font = new System.Drawing.Font("굴림", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblDataCount.Location = new System.Drawing.Point(5, 5);
             this.lblDataCount.Name = "lblDataCount";
             this.lblDataCount.Size = new System.Drawing.Size(241, 63);
@@ -206,15 +206,13 @@
             this.tlpControls.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpControls.Controls.Add(this.dataGridView1, 0, 0);
             this.tlpControls.Controls.Add(this.pnlTriggerCount, 0, 1);
-            this.tlpControls.Controls.Add(this.lblStatus, 0, 2);
-            this.tlpControls.Controls.Add(this.tlpControlsButton, 0, 3);
-            this.tlpControls.Controls.Add(this.rtxLog, 0, 4);
+            this.tlpControls.Controls.Add(this.tlpControlsButton, 0, 2);
+            this.tlpControls.Controls.Add(this.rtxLog, 0, 3);
             this.tlpControls.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpControls.Location = new System.Drawing.Point(0, 0);
             this.tlpControls.Name = "tlpControls";
-            this.tlpControls.RowCount = 5;
+            this.tlpControls.RowCount = 4;
             this.tlpControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.tlpControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tlpControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tlpControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tlpControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 66.66666F));
@@ -237,7 +235,7 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dataGridView1.Size = new System.Drawing.Size(278, 47);
+            this.dataGridView1.Size = new System.Drawing.Size(278, 80);
             this.dataGridView1.TabIndex = 0;
             // 
             // Number
@@ -266,7 +264,7 @@
             this.pnlTriggerCount.Controls.Add(this.lblTriggerCount);
             this.pnlTriggerCount.Controls.Add(this.btnTriggerCountReset);
             this.pnlTriggerCount.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlTriggerCount.Location = new System.Drawing.Point(3, 56);
+            this.pnlTriggerCount.Location = new System.Drawing.Point(3, 89);
             this.pnlTriggerCount.Name = "pnlTriggerCount";
             this.pnlTriggerCount.Size = new System.Drawing.Size(278, 94);
             this.pnlTriggerCount.TabIndex = 1;
@@ -274,7 +272,7 @@
             // lblTriggerCount
             // 
             this.lblTriggerCount.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTriggerCount.Font = new System.Drawing.Font("Gulim", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblTriggerCount.Font = new System.Drawing.Font("굴림", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblTriggerCount.Location = new System.Drawing.Point(0, 0);
             this.lblTriggerCount.Name = "lblTriggerCount";
             this.lblTriggerCount.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
@@ -286,7 +284,7 @@
             // btnTriggerCountReset
             // 
             this.btnTriggerCountReset.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnTriggerCountReset.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.btnTriggerCountReset.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnTriggerCountReset.Location = new System.Drawing.Point(199, 0);
             this.btnTriggerCountReset.Name = "btnTriggerCountReset";
             this.btnTriggerCountReset.Size = new System.Drawing.Size(79, 94);
@@ -294,17 +292,6 @@
             this.btnTriggerCountReset.Text = "Reset";
             this.btnTriggerCountReset.UseVisualStyleBackColor = true;
             this.btnTriggerCountReset.Click += new System.EventHandler(this.btnTriggerCountReset_Click);
-            // 
-            // lblStatus
-            // 
-            this.lblStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblStatus.Font = new System.Drawing.Font("Gulim", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblStatus.Location = new System.Drawing.Point(3, 153);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(278, 100);
-            this.lblStatus.TabIndex = 2;
-            this.lblStatus.Text = "Status";
-            this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tlpControlsButton
             // 
@@ -316,7 +303,7 @@
             this.tlpControlsButton.Controls.Add(this.btnToolControl, 1, 0);
             this.tlpControlsButton.Controls.Add(this.btnCameraControl, 0, 0);
             this.tlpControlsButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpControlsButton.Location = new System.Drawing.Point(3, 256);
+            this.tlpControlsButton.Location = new System.Drawing.Point(3, 189);
             this.tlpControlsButton.Name = "tlpControlsButton";
             this.tlpControlsButton.RowCount = 2;
             this.tlpControlsButton.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -373,9 +360,9 @@
             this.rtxLog.BackColor = System.Drawing.SystemColors.InfoText;
             this.rtxLog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtxLog.ForeColor = System.Drawing.SystemColors.Window;
-            this.rtxLog.Location = new System.Drawing.Point(3, 356);
+            this.rtxLog.Location = new System.Drawing.Point(3, 289);
             this.rtxLog.Name = "rtxLog";
-            this.rtxLog.Size = new System.Drawing.Size(278, 100);
+            this.rtxLog.Size = new System.Drawing.Size(278, 167);
             this.rtxLog.TabIndex = 4;
             this.rtxLog.Text = "";
             this.rtxLog.TextChanged += new System.EventHandler(this.rtxLog_TextChanged);
@@ -397,7 +384,6 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.pnlTitle.ResumeLayout(false);
-            this.pnlTitle.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -429,7 +415,6 @@
         private System.Windows.Forms.Panel pnlTriggerCount;
         private System.Windows.Forms.Button btnTriggerCountReset;
         private System.Windows.Forms.Label lblTriggerCount;
-        private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.TableLayoutPanel tlpControlsButton;
         private System.Windows.Forms.RichTextBox rtxLog;
         private System.Windows.Forms.Button btnMergeControl;

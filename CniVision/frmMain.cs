@@ -1,21 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
 using System.Drawing.Imaging;
-using System.Net.NetworkInformation;
 
 using Cognex.VisionPro;
 using Cognex.VisionPro.FGGigE;
 using Cognex.VisionPro.Display;
-using System.Net;
 
 namespace CniVision
 {
@@ -88,8 +83,6 @@ namespace CniVision
         #region 초기화 부분
         public frmMain()
         {
-
-
             InitializeComponent();
 
             InitializeCameras();
@@ -97,7 +90,6 @@ namespace CniVision
             InitializeSignal();
             InitializeForm();
             InitializeNetwork();
-
         }
 
 
@@ -123,13 +115,15 @@ namespace CniVision
         private void InitializeSignal()
         {
             ioControl = new CniIOControl();
-            ioControl.SetInputToOutputSignal(9, 7);
+            
+            //ioControl.SetInputToOutputSignal(9, 7);
         }
 
         private void InitializeForm()
         {
             Icon = Properties.Resources.Logo;
             splitContainer1.FixedPanel = FixedPanel.Panel2;
+            picLogo.Size = Icon.Size;
         }
 
         // 카메라 초기화 (검색 및 연결)
@@ -220,8 +214,6 @@ namespace CniVision
             {
                 lblTactTime.Text = $"Time : {iTactTime} ms";
                 lblTriggerCount.Text = $"Trigger Count : {iTrigCount}";
-                lblStatus.Text = "검사 대기";
-                lblStatus.BackColor = Color.Green;
                 lblDataCount.Text = $"찾은 개수 : {iDataCount}";
             }, null);
 
@@ -245,7 +237,7 @@ namespace CniVision
         {
             syncContext.Post(delegate
             {
-                lblTime.Text = DateTime.Now.ToString();
+                lblTime.Text = DateTime.Now.ToString("yyyy-MM-dd" + "\r\n" + "tt hh:mm:ss");
             }, null);
         }
 
@@ -439,14 +431,6 @@ namespace CniVision
                     images[i] = null;
                 }
             }
-            //-------------------------------//
-            //// 전체 카메라 촬영 완료 확인 부분
-            //if (cameraAcqState.All(acqState => acqState))
-            //{
-            //    Console.WriteLine("모든 카메라 촬영 완료");
-            //    Process();                                  // 모든 이미지가 촬영 완료, 즉 이미지가 들어왔을 때만 Process함수를 실행
-            //}
-            //-------------------------------//
         }
 
 
@@ -458,6 +442,8 @@ namespace CniVision
         // 이미지 병합 후 도구 처리
         private void Process()
         {
+
+
             WriteLog("검사 시작", false);
             // UI 변경 부분
             {
@@ -476,9 +462,6 @@ namespace CniVision
                         dataGridView1.Rows.Clear();
                     }
 
-                    // 검사 상태 변경
-                    lblStatus.Text = "검사 중";
-                    lblStatus.BackColor = Color.Orange;
 
                     // 검사 카운트 증가
                     lblTriggerCount.Text = $"Trigger Count : {++iTrigCount}";
@@ -590,7 +573,6 @@ namespace CniVision
         #endregion
 
         #region 툴 이벤트 함수
-
         private void ToolProcessRan(bool state)
         {
             cStopWatch.Stop();
@@ -616,9 +598,6 @@ namespace CniVision
 
                     cRecordDisplay.Record = toolProcess.GetRecordResult();
 
-                    lblStatus.Text = "검사 대기";
-                    lblStatus.BackColor = Color.Green;
-
                     lblDataCount.Text = $"찾은 개수 : {dicResult.Count.ToString()}";
 
                     lblTactTime.Text = $"Time : {iTactTime} ms";
@@ -632,9 +611,6 @@ namespace CniVision
                 // 검사 실패
                 syncContext.Post(delegate
                 {
-                    lblStatus.Text = "검사 대기";
-                    lblStatus.BackColor = Color.Green;
-
                     lblDataCount.Text = $"찾은 개수 : 0";
 
                     lblTactTime.Text = $"Time : {iTactTime} ms";
@@ -721,7 +697,7 @@ namespace CniVision
         private void ChangeCameraTriggerModel(CogAcqTriggerModelConstants trigModel)
         {
             // 테스트 모드일 경우 트리거 모드 변경하지 않음
-            if (test) return;
+            if (test || cameras is null) return;
 
             foreach (CniCamera cam in cameras)
             {
@@ -765,5 +741,7 @@ namespace CniVision
                 ChangeCameraTriggerModel(CogAcqTriggerModelConstants.Auto);
             }
         }
+
+
     }
 }
