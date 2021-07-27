@@ -12,6 +12,8 @@ using Cognex.VisionPro;
 using Cognex.VisionPro.FGGigE;
 using Cognex.VisionPro.Display;
 
+using CniVision.IO;
+
 namespace CniVision
 {
     public partial class frmMain : Form

@@ -9,11 +9,72 @@ using System.Windows.Forms;
 
 namespace CniVision
 {
-    public static class CniIniControl
+    /// <summary>
+    /// 시스템 설정 변수들
+    /// </summary>
+    public struct SystemConfig
     {
+        /// <summary>
+        /// 이미지 저장 경로
+        /// </summary>
+        public string SaveImageDirectory { get; set; }
+        /// <summary>
+        /// 결과 데이터 저장 경로
+        /// </summary>
+        public string SaveDataDirectory { get; set; }
+        /// <summary>
+        /// 원본 이미지 저장 여부
+        /// </summary>
+        public bool IsSaveOriginImage { get; set; }
+        /// <summary>
+        /// 결과 이미지 저장 여부
+        /// </summary>
+        public bool IsSaveResultImage { get; set; }
+        /// <summary>
+        /// CSV 형식 결과 데이터 저장 여부
+        /// </summary>
+        public bool IsSaveCSV { get; set; }
+        /// <summary>
+        /// TXT 형식 결과 데이터 저장 여부
+        /// </summary>
+        public bool IsSaveTXT { get; set; }
+    }
 
+    public class CniIniControl 
+    {
         private static readonly string iniPath = Application.StartupPath + @"\Config.ini";
 
+        public static void CheckAndCreateIniFile()
+        {
+            if (!File.Exists(iniPath))
+            {
+                CniIniDllImport.IniWriteValue("SYSTEM", "Image_Directory", Application.StartupPath);
+                CniIniDllImport.IniWriteValue("SYSTEM", "Data_Directory", Application.StartupPath);
+                CniIniDllImport.IniWriteValue("SYSTEM", "Origin_Image", false.ToString());
+                CniIniDllImport.IniWriteValue("SYSTEM", "Result_Image", false.ToString());
+                CniIniDllImport.IniWriteValue("SYSTEM", "CSV", false.ToString());
+                CniIniDllImport.IniWriteValue("SYSTEM", "TXT", false.ToString());
+
+                CniIniDllImport.IniWriteValue("CAMERA", "", "");
+
+                CniIniDllImport.IniWriteValue("INPUTSIGNAL", "Trigger_Enable", "");
+                CniIniDllImport.IniWriteValue("INPUTSIGNAL", "Polarity", "");
+                CniIniDllImport.IniWriteValue("INPUTSIGNAL", "Debounce_Time", "");
+
+                CniIniDllImport.IniWriteValue("OUTPUTSIGNAL", "Read_Enable", "");
+                CniIniDllImport.IniWriteValue("OUTPUTSIGNAL", "NoRead_Enable", "");
+                CniIniDllImport.IniWriteValue("OUTPUTSIGNAL", "Action", "");
+                CniIniDllImport.IniWriteValue("OUTPUTSIGNAL", "Pulse_Width", "");
+
+            }
+        }
+
+
+    }
+
+    public static class CniIniDllImport
+    {
+        private static readonly string iniPath = Application.StartupPath + @"\Config.ini";
 
         [DllImport("kernel32")]
         private static extern uint GetPrivateProfileString(
@@ -88,106 +149,6 @@ namespace CniVision
             }
             return result;
         }
-        
     }
 
-    // Ini File 변수 및 조작
-    public static class CniIniArguments
-    {
-        private static string _SaveImageDirectory;
-        private static string _SaveDataDirectory;
-        private static bool _IsSaveOriginImage;
-        private static bool _IsSaveResultImage;
-        private static bool _IsSaveCSV;
-        private static bool _IsSaveTXT;
-        public static string SaveImageDirectory
-        {
-            get
-            {
-                return _SaveImageDirectory;
-            }
-            set
-            {
-                _SaveImageDirectory = value;
-                CniIniControl.IniWriteValue("PROGRAM", "SAVE_IMAGE_PATH", _SaveImageDirectory);
-
-            }
-        }
-        public static string SaveDataDirectory
-        {
-            get
-            {
-                return _SaveDataDirectory;
-            }
-            set
-            {
-                _SaveDataDirectory = value;
-                CniIniControl.IniWriteValue("PROGRAM", "SAVE_DATA_PATH", _SaveDataDirectory);
-
-            }
-        }
-        public static bool IsSaveOriginImage
-        {
-            get
-            {
-                return _IsSaveOriginImage;
-            }
-            set
-            {
-                _IsSaveOriginImage = value;
-                CniIniControl.IniWriteValue("PROGRAM", "SAVE_ORIGIN_IMAGE", _IsSaveOriginImage.ToString());
-            }
-        }
-        public static bool IsSaveResultImage
-        {
-            get
-            {
-                return _IsSaveResultImage;
-            }
-            set
-            {
-                _IsSaveResultImage = value;
-                CniIniControl.IniWriteValue("PROGRAM", "SAVE_RESULT_IMAGE", _IsSaveResultImage.ToString());
-            }
-        }
-        public static bool IsSaveCSV
-        {
-            get
-            {
-                return _IsSaveCSV;
-            }
-            set
-            {
-                _IsSaveCSV = value;
-                CniIniControl.IniWriteValue("PROGRAM", "SAVE_CSV", _IsSaveCSV.ToString());
-
-            }
-        }
-        public static bool IsSaveTXT
-        {
-            get
-            {
-                return _IsSaveTXT;
-            }
-            set
-            {
-                _IsSaveTXT = value;
-                CniIniControl.IniWriteValue("PROGRAM", "SAVE_TXT", _IsSaveTXT.ToString());
-            }
-        }
-
-        static CniIniArguments()
-        {
-            _SaveImageDirectory = CniIniControl.IniReadValue("PROGRAM", "SAVE_IMAGE_PATH");
-            _SaveDataDirectory = CniIniControl.IniReadValue("PROGRAM", "SAVE_DATA_PATH");
-            _IsSaveOriginImage = bool.Parse(CniIniControl.IniReadValue("PROGRAM", "SAVE_ORIGIN_IMAGE"));
-            _IsSaveResultImage = bool.Parse(CniIniControl.IniReadValue("PROGRAM", "SAVE_RESULT_IMAGE"));
-            _IsSaveCSV = bool.Parse(CniIniControl.IniReadValue("PROGRAM", "SAVE_CSV"));
-            _IsSaveTXT = bool.Parse(CniIniControl.IniReadValue("PROGRAM", "SAVE_TXT"));
-        }
-
-
-
-
-    }
 }

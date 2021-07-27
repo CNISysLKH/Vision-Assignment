@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 namespace CniVision
 {
 
-    public class CniIOControl
+    public class _CniIOControl
     {
 
         public static string[] Input = new string[16] { "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" };
@@ -20,7 +20,7 @@ namespace CniVision
 
 
         // 초기화
-        public CniIOControl()
+        public _CniIOControl()
         {
             for (int i = 0; i < 16; ++i)
             {

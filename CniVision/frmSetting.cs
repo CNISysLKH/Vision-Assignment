@@ -9,39 +9,174 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
+using CniVision.IO;
 
 namespace CniVision
 {
+
+
     public partial class frmSetting : Form
     {
-        // Setting Form의 Sync Context
+        /// <summary>
+        /// Form을 불러올 때 사용 할 Sync Context
+        /// </summary>
         private static SynchronizationContext syncContext = SynchronizationContext.Current;
 
-        private CniIOControl ioControl = null;
-
-        public frmSetting(CniIOControl ioControl)
+        /// <summary>
+        ///  생성자
+        /// </summary>
+        /// <param name="control"></param>
+        public frmSetting(CniIOControl control)
         {
             Icon = Properties.Resources.Logo;
-            this.ioControl = ioControl;
+            IOControl = control;
 
             InitializeComponent();
+            InitializeControls();
+        }
 
-            gbxIOBoradSignalSetting.Enabled = ioControl.ConnectionStatus;       // IO 보드가 연결 되었을 경우에만 활성화
 
-            // Signal 콤보박스 초기화
-            for (int i = 0; i < 16; ++i)
+        /// <summary>
+        /// 프로그램 IO 클래스
+        /// </summary>
+        private CniIOControl IOControl = null;
+
+
+        /// <summary>
+        /// 설정 화면 컨트롤 초기화
+        /// </summary>
+        private void InitializeControls()
+        {
+            // 시스템 설정 초기화
+
+
+            // Input 신호 설정 초기화
+
+
+            // Output 신호 설정 초기화
+
+
+        }
+
+
+
+
+
+        private void InitializeInputSignalConfiguration()
+        {
+
+            for (int i = 0; i < CniIOControl.ISArray.Length; ++i)
             {
-                cmbInputSignal.Items.Add($"Input Signal {i}");
-                cmbOutputSignal.Items.Add($"Output Signal {i}");
-                cmbInputPolarity.Items.Add($"Input {i}");
-                cmbOutputAction.Items.Add($"Ouput {i}");
+
+                if (CniIOControl.ISArray[i].TriggerEnable)
+                {
+                    ((CheckBox)tlpInputSignalConfiguration.GetControlFromPosition(i + 1, 2)).Checked = true;
+                }
+                else
+                {
+                    ((CheckBox)tlpInputSignalConfiguration.GetControlFromPosition(i + 1, 2)).Checked = false;
+
+                }
+
+                if (CniIOControl.ISArray[i].Polarity)
+                {
+                    ((CheckBox)tlpInputSignalConfiguration.GetControlFromPosition(i + 1, 4)).Checked = true;
+                    ((CheckBox)tlpInputSignalConfiguration.GetControlFromPosition(i + 1, 5)).Checked = false;
+                }
+                else
+                {
+                    ((CheckBox)tlpInputSignalConfiguration.GetControlFromPosition(i + 1, 4)).Checked = false;
+                    ((CheckBox)tlpInputSignalConfiguration.GetControlFromPosition(i + 1, 5)).Checked = true;
+                }
+
+                ((NumericUpDown)tlpInputSignalConfiguration.GetControlFromPosition(i + 1, 6)).Value = CniIOControl.ISArray[i].DebounceTime;
+
             }
+        }
 
-            cmbInputSignal.SelectedIndex = 0;
-            cmbOutputSignal.SelectedIndex = 0;
-            cmbInputPolarity.SelectedIndex = 0;
-            cmbOutputAction.SelectedIndex = 0;
+        private void InitializeOutputSignalConfiguration()
+        {
+            for (int i = 0; i < CniIOControl.OSArray.Length; ++i)
+            {
 
+                if (CniIOControl.OSArray[i].ReadEnable)
+                {
+                    ((CheckBox)tlpInputSignalConfiguration.GetControlFromPosition(i + 1, 2)).Checked = true;
+                }
+                else
+                {
+                    ((CheckBox)tlpInputSignalConfiguration.GetControlFromPosition(i + 1, 2)).Checked = false;
+
+                }
+
+                if (CniIOControl.OSArray[i].NoReadEnable)
+                {
+                    ((CheckBox)tlpInputSignalConfiguration.GetControlFromPosition(i + 1, 3)).Checked = true;
+                }
+                else
+                {
+                    ((CheckBox)tlpInputSignalConfiguration.GetControlFromPosition(i + 1, 3)).Checked = false;
+
+                }
+
+                if (CniIOControl.OSArray[i].Action)
+                {
+                    ((CheckBox)tlpInputSignalConfiguration.GetControlFromPosition(i + 1, 5)).Checked = true;
+                    ((CheckBox)tlpInputSignalConfiguration.GetControlFromPosition(i + 1, 6)).Checked = false;
+                }
+                else
+                {
+                    ((CheckBox)tlpInputSignalConfiguration.GetControlFromPosition(i + 1, 5)).Checked = false;
+                    ((CheckBox)tlpInputSignalConfiguration.GetControlFromPosition(i + 1, 6)).Checked = true;
+                }
+
+              ((NumericUpDown)tlpInputSignalConfiguration.GetControlFromPosition(i + 1, 7)).Value = CniIOControl.OSArray[i].PulseWidth;
+
+            }
+        }
+
+        private void SaveInputSignalConfigValues()
+        {
+            for (int i = 0; i < CniIOControl.ISArray.Length; ++i)
+            {
+
+                CniIOControl.ISArray[i].TriggerEnable = ((CheckBox)tlpInputSignalConfiguration.GetControlFromPosition(i + 1, 2)).Checked;
+
+                if (((CheckBox)tlpInputSignalConfiguration.GetControlFromPosition(i + 1, 4)).Checked)
+                {
+                    CniIOControl.ISArray[i].Polarity = true;
+                }
+                else
+                {
+                    CniIOControl.ISArray[i].Polarity = false;
+                }
+
+                CniIOControl.ISArray[i].DebounceTime = decimal.ToInt32(((NumericUpDown)tlpInputSignalConfiguration.GetControlFromPosition(i + 1, 6)).Value);
+            }
+        }
+
+        private void SaveOutputSignalConfigValues()
+        {
+            for (int i = 0; i < CniIOControl.OSArray.Length; ++i)
+            {
+
+                CniIOControl.OSArray[i].ReadEnable = ((CheckBox)tlpInputSignalConfiguration.GetControlFromPosition(i + 1, 2)).Checked;
+                CniIOControl.OSArray[i].NoReadEnable = ((CheckBox)tlpInputSignalConfiguration.GetControlFromPosition(i + 1, 3)).Checked;
+
+                if (((CheckBox)tlpInputSignalConfiguration.GetControlFromPosition(i + 1, 5)).Checked)
+                {
+                    CniIOControl.OSArray[i].Action = true;
+                }
+                else
+                {
+                    CniIOControl.OSArray[i].Action = false;
+                }
+
+                CniIOControl.OSArray[i].PulseWidth = decimal.ToInt32(((NumericUpDown)tlpInputSignalConfiguration.GetControlFromPosition(i + 1, 7)).Value);
+            }
         }
 
         #region 폼 관련 이벤트
@@ -125,109 +260,7 @@ namespace CniVision
         }
         #endregion
 
-        #region I/O 연결 선택
 
-        // Output 순번을 바꿀 Input 설정
-        private void cmbInputSignal_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int inSignalIndex = cmbInputSignal.SelectedIndex;
 
-            //int outSignalNum = ioControl.GetInputToOutputSignal(inSignalIndex);
-
-            //if (outSignalNum != -1)
-            //{
-            //    cmbOutputSignal.SelectedIndex = outSignalNum;
-            //}
-            //else
-            //{
-            //    cmbOutputSignal.SelectedIndex = 0;
-            //}
-
-        }
-        // Input 순번의 출력 Output 설정
-        //private void cmbOutputSignal_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    int outSignalIndex = cmbOutputSignal.SelectedIndex;
-
-        //ioControl.SetInputToOutputSignal(cmbInputSignal.SelectedIndex, outSignalIndex);
-
-        //}
-        // Input 극성 콤보박스 목록 변경시
-        private void cmbInputPolarity_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int idx = cmbInputPolarity.SelectedIndex;
-
-            bool state = ioControl.GetPolarity(idx);
-
-            if (state)
-            {
-                rdbInputRisingEdge.Checked = true;
-            }
-            else
-            {
-                rdbInputFallingEdge.Checked = true;
-            }
-        }
-        // Input 극성 상승 설정
-        private void rdbInputRisingEdge_CheckedChanged(object sender, EventArgs e)
-        {
-            int idx = cmbInputPolarity.SelectedIndex;
-
-            if (rdbInputRisingEdge.Checked)
-            {
-                ioControl.SetPolarity(idx, true);
-            }
-        }
-        // Input 극성 하강 설정
-        private void rdbInputFallingEdge_CheckedChanged(object sender, EventArgs e)
-        {
-            int idx = cmbInputPolarity.SelectedIndex;
-
-            if (rdbInputFallingEdge.Checked)
-            {
-                ioControl.SetPolarity(idx, false);
-            }
-        }
-        // Output 작업 콤보박스 목록 변경 시
-        private void cmbOutputAction_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int idx = cmbOutputAction.SelectedIndex;
-
-            bool state = ioControl.GetOutputAction(idx);
-
-            if (state)
-            {
-                rdbOutputOpen.Checked = true;
-            }
-            else
-            {
-                rdbOutputClose.Checked = true;
-            }
-        }
-        // Output 열기 활성화
-        private void rdbOutputOpen_CheckedChanged(object sender, EventArgs e)
-        {
-            int idx = cmbOutputAction.SelectedIndex;
-
-            if (rdbOutputOpen.Checked)
-            {
-                ioControl.OutputOpen(idx);
-            }
-        }
-        // Output 닫기 활성화
-        private void rdbOutputClose_CheckedChanged(object sender, EventArgs e)
-        {
-            int idx = cmbOutputAction.SelectedIndex;
-
-            if (rdbOutputClose.Checked)
-            {
-                ioControl.OutputClose(idx);
-            }
-        }
-
-        #endregion
     }
-
-
-
 }
